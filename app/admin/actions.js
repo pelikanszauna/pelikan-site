@@ -78,7 +78,8 @@ export async function generateSlots(formData) {
     price_nonmember: int(formData.get('price_nonmember'), 4000),
   };
   const sb = db();
-  const { data: existing } = await sb.from('slots').select('starts_at');
+  const { data: existing, error: readErr } = await sb.from('slots').select('starts_at');
+  if (readErr) redirect(`/admin/generate?error=${encodeURIComponent('Database read failed: ' + readErr.message)}`);
   const have = new Set((existing || []).map((s) => new Date(s.starts_at).getTime()));
 
   const rows = [];
@@ -94,8 +95,11 @@ export async function generateSlots(formData) {
     }
     cur.setUTCDate(cur.getUTCDate() + 1);
   }
-  if (rows.length) await sb.from('slots').insert(rows);
-  revalidatePath('/');
+  if (rows.length) {
+    const { error: insErr } = await sb.from('slots').insert(rows);
+    if (insErr) redirect(`/admin/generate?error=${encodeURIComponent('Database write failed: ' + insErr.message)}`);
+  }
+  revalidatePath('/'); revalidatePath('/sessions');
   redirect(`/admin?created=${rows.length}`);
 }
 

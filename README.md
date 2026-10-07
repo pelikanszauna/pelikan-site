@@ -37,3 +37,11 @@ Run locally instead: `npm install`, copy `.env.example` to `.env.local`, fill it
   `app/api/stripe/webhook/route.js` (Számlázz.hu or Billingo API).
 - A guest who pays after the 31-minute hold expired is still confirmed, even if the session has since filled up.
   Check the roster if you see a session over capacity.
+
+## Editing the site
+
+- **Words and pictures** on Home, About and Gallery live in `lib/content.js`.
+- **Photos:** upload files into `public/gallery/` (GitHub: open the folder, Add file, Upload files),
+  then add a line to `images` in `lib/content.js`. Compress photos to under about 500 KB each first.
+- **Brand font and colours:** `public/fonts/Arvocado-Regular.otf` and the variables at the top of `app/globals.css`.
+  Arvocado has no ő or ű, so those two letters fall back to Josefin Sans.

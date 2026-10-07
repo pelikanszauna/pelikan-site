@@ -29,7 +29,7 @@ export default async function Book({ params, searchParams }) {
       {sp?.error && <p className="notice err" role="alert">{sp.error}</p>}
 
       {past || left <= 0 ? (
-        <p className="notice">This session is {past ? 'no longer open' : s.is_private ? 'already booked' : 'full'}. <a href="/">See other sessions</a>.</p>
+        <p className="notice">This session is {past ? 'no longer open' : s.is_private ? 'already booked' : 'full'}. <a href="/sessions">See other sessions</a>.</p>
       ) : (
         <form action={startCheckout} className="stack">
           <input type="hidden" name="slot_id" value={s.id} />

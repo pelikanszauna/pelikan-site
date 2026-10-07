@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 export default async function Success({ searchParams }) {
   const { t } = await searchParams;
   const { data: b } = await db().from('bookings').select('*, slots(*)').eq('cancel_token', t || '').maybeSingle();
-  if (!b) return <section className="hero"><h1>Booking not found</h1><p><a href="/">Back to sessions</a></p></section>;
+  if (!b) return <section className="hero"><h1>Booking not found</h1><p><a href="/sessions">Back to sessions</a></p></section>;
 
   if (b.status === 'pending') {
     return (
@@ -19,7 +19,7 @@ export default async function Success({ searchParams }) {
     );
   }
   if (b.status !== 'paid') {
-    return <section className="hero"><h1>This booking is {b.status}</h1><p><a href="/">Back to sessions</a></p></section>;
+    return <section className="hero"><h1>This booking is {b.status}</h1><p><a href="/sessions">Back to sessions</a></p></section>;
   }
   return (
     <section className="hero">

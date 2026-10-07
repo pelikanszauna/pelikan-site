@@ -15,20 +15,24 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Source+Sans+3:wght@400;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap"
         />
       </head>
       <body>
+        <div className="stripe" aria-hidden="true" />
         <header className="top">
           <Link href="/" className="mark">Pelikan Szauna</Link>
           <nav aria-label="Main">
-            <Link href="/">Sessions</Link>
+            <Link href="/">Home</Link>
+            <Link href="/sessions">Sessions</Link>
+            <Link href="/about">About</Link>
+            <Link href="/gallery">Gallery</Link>
             <Link href="/membership">Membership</Link>
           </nav>
         </header>
         <main>{children}</main>
         <footer>
-          <p>Pelikan Szauna Egyesület, Budapest. Reconnecting Budapest through sauna.</p>
+          <p>Pelikan Szauna Egyesület, Budapest. Community sauna in Budapest.</p>
           <p><a href="https://instagram.com/pelikanszauna">Instagram</a></p>
         </footer>
       </body>

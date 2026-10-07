@@ -4,12 +4,14 @@ import { generateSlots } from '../actions';
 
 const DAYS = [['1', 'Mon'], ['2', 'Tue'], ['3', 'Wed'], ['4', 'Thu'], ['5', 'Fri'], ['6', 'Sat'], ['0', 'Sun']];
 
-export default async function Generate() {
+export default async function Generate({ searchParams }) {
   await requireAdmin();
+  const sp = await searchParams;
   return (
     <div className="wide">
       <AdminNav />
       <h1>Create sessions</h1>
+      {sp?.error && <p className="notice err" role="alert">{sp.error}</p>}
       <p className="hint">Times are Budapest time. Sessions that already exist at the same start time are skipped. You can edit each one afterwards.</p>
       <form action={generateSlots} className="stack">
         <div className="grid2">

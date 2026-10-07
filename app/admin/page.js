@@ -11,11 +11,13 @@ export default async function Admin({ searchParams }) {
   await requireAdmin();
   const sp = await searchParams;
   const since = new Date(Date.now() - 24 * 3600 * 1000).toISOString();
-  const { data: slots } = await db().from('slot_availability').select('*').gt('ends_at', since).order('starts_at');
+  const { data: slots, error } = await db().from('slot_availability').select('*').gt('ends_at', since).order('starts_at');
   return (
     <div className="wide">
       <AdminNav />
-      {sp?.created && <p className="notice">{sp.created} sessions created.</p>}
+      {sp?.created && <p className="notice">{sp.created} new sessions created.</p>}
+      {error && <p className="notice err" role="alert">Database problem: {error.message}. Check SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel, and that schema.sql ran.</p>}
+      {!error && <p className="hint">{(slots || []).length} sessions in the database from yesterday onwards.</p>}
       <div className="table-wrap">
         <table>
           <thead><tr><th>Date</th><th>Time</th><th>Type</th><th>Places</th><th>Price</th><th>Public</th><th></th></tr></thead>
