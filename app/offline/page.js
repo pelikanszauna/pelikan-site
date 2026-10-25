@@ -1,8 +1,8 @@
 export const metadata = { title: 'Back soon · Pelikan Szauna' };
 
 // Edit the words and the form link here.
-const TEXT = 'Booking is switched off for now. Use the button below to stay in touch.';
-const BUTTON = 'Stay in touch';
+const TEXT = 'Book using this link for now. The button takes you there.';
+const BUTTON = 'Booking Link';
 const FORM_URL = 'https://form.everestwebdeals.co/?form=1fd03dc415923b77fd474f064274b8a2';
 
 export default function Offline() {
